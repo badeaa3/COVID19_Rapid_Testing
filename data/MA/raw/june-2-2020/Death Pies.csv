@@ -1,0 +1,17 @@
+Date,Category,Response,Deaths
+6/1/2020,Sex,Male,3345
+6/1/2020,Sex,Female,3684
+6/1/2020,Hosp,Yes,3865
+6/1/2020,Hosp,No,856
+6/1/2020,Hosp,Unknown,2314
+6/1/2020,Preexist,Yes,3223
+6/1/2020,Preexist,No,54
+6/1/2020,Preexist,Unknown,3758
+6/2/2020,Sex,Male,3368
+6/2/2020,Sex,Female,3712
+6/2/2020,Hosp,Yes,3906
+6/2/2020,Hosp,No,860
+6/2/2020,Hosp,Unknown,2319
+6/2/2020,Preexist,Yes,3269
+6/2/2020,Preexist,No,55
+6/2/2020,Preexist,Unknown,3761
