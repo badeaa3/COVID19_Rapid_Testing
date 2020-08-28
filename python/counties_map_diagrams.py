@@ -52,7 +52,7 @@ print("Percentage of California population used: {}".format(total_included_pop/r
 # Load the map data
 map_series_rapid_county = "map_series_rapid_county.csv"
 map_series_pcr_uniform = "map_series_pcr_uniform.csv" 
-inFileName = map_series_pcr_uniform
+inFileName = map_series_rapid_county
 df = pd.read_csv("county_output/" + inFileName,index_col=0)
 d = df.to_dict("split")
 map_series = {}
@@ -260,6 +260,7 @@ for freq, series in steps.items():
         fig.update_layout(height=500,width=1200)
         fig.layout.margin.update({'t':15, 'b':15,'l':0,'r':200})
         fig.write_image(outDir+"/covid_" + place + "_map_thresh{}_iter_{}".format(freq,t) + ".pdf")
+        fig.write_image(outDir+"/covid_" + place + "_map_thresh{}_iter_{}".format(freq,t) + ".png")
         #fig.show()
         
         figs.append(fig)
@@ -361,6 +362,8 @@ def make_panel(figs, binning_endpoints, freq, cost, outDir = 'county_output/Figu
     #fig.show()
     figname = outDir + "/" + place + "_map_progression" + "_thresh{}".format(freq) + ".pdf"
     fig.write_image(figname)
+    figname1 = outDir + "/" + place + "_map_progression" + "_thresh{}".format(freq) + ".png"
+    fig.write_image(figname1)
     
     return figname
 

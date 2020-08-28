@@ -90,8 +90,8 @@ county_freqs_uniform, county_scan_uniform, county_series_uniform = load(scanName
 pcr_freqs_uniform, pcr_scan_uniform, pcr_series_uniform = load(scanName="pcr_based_uniform_scan.csv", seriesName="pcr_based_uniform_series.csv")
 
 # Print out some useful statistics 
-print(np.array(county_scan[0.0005437278755471922]['I']) + np.array(county_scan[0.0005437278755471922]['D']))
-print(np.array(county_scan_uniform[0.15517241379310345]['I']) + np.array(county_scan_uniform[0.15517241379310345]['D']))
+# print(np.array(county_scan[0.0005437278755471922]['I']) + np.array(county_scan[0.0005437278755471922]['D']))
+# print(np.array(county_scan_uniform[0.15517241379310345]['I']) + np.array(county_scan_uniform[0.15517241379310345]['D']))
 
 outDir = 'county_output/Figure5'
 sens = 0.8
@@ -113,13 +113,13 @@ cost_min,cost_max = 0.5,2.5
 cumulative_min, cumulative_max = 1.0, 1.75
 hosp_min, hosp_max = 0.01448, 0.0148
 dead_min, dead_max = 0.0045, 0.007
-xlabelpad = 15
-ylabelpad = 15
+xlabelpad = 20
+ylabelpad = 20
 
 
 fig = plt.figure(figsize=(40,10))
 ax0 = fig.add_subplot(131)
-plt.suptitle('Sensitivity: {}%, Specificity: {}%'.format(str(np.around(100*sens,1)),np.around(100*spec,1)),fontsize=22,y=1.05)
+plt.suptitle('Sensitivity: {}%, Specificity: {}%'.format(str(np.around(100*sens,1)),np.around(100*spec,1)),fontsize=25,y=1.05)
 fig,ax0 = make_fig(fig,ax0)
 
 cp = []
@@ -141,10 +141,10 @@ for freq, sts in county_scan.items():
                 f = 1.0
             cost += f*price*(county_series[freq][county]['S'][i]+county_series[freq][county]['I'][i]+county_series[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(length*POP))
-ax0.plot(cp,tp,color='black',linewidth=2.5,zorder=1,label=county_variable)
-ax0.set_xlabel(xlabel)
-ax0.set_ylabel(ylabel)
-sc = ax0.scatter(cp,tp,marker='o',c = [np.log(f) for f in county_freqs],cmap = 'RdPu',zorder=2)
+ax0.plot(cp,tp,color='black',linewidth=2.5,zorder=3,label=county_variable)
+ax0.set_xlabel(xlabel,fontsize=25)
+ax0.set_ylabel(ylabel,fontsize=25)
+sc = ax0.scatter(cp,tp,marker='o',c = [np.log(f) for f in county_freqs],cmap = 'RdPu',zorder=4,s=100)
 
 
 # cp = []
@@ -184,7 +184,7 @@ for freq, sts in pcr_scan_uniform.items():
             f = freq
             cost += f*100*(pcr_series_uniform[freq][county]['S'][i]+pcr_series_uniform[freq][county]['I'][i]+pcr_series_uniform[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(scale_pcr_cost*length*POP))
-ax0.plot(cp,tp,color='pink',linewidth=2.5,label=uniform_pcr.format(scale_pcr_total))
+ax0.plot(cp,tp,color='#3ECBC2',linewidth=2.5,label=uniform_pcr.format(scale_pcr_total),zorder=1)
 
 cp = []
 price = 5
@@ -200,7 +200,7 @@ for freq, sts in county_scan_uniform.items():
             f= freq
             cost += f*price*(county_series_uniform[freq][county]['S'][i]+county_series_uniform[freq][county]['I'][i]+county_series_uniform[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(length*POP))
-ax0.plot(cp,tp,color='grey',linewidth=2.5,label=uniform)
+ax0.plot(cp,tp,color='grey',linewidth=2.5,label=uniform,zorder=2)
 ax0.set_xlim(cost_min,cost_max)
 ax0.set_ylim(per_100k*cumulative_min,per_100k*cumulative_max)
 ax0.get_yaxis().set_major_formatter(FuncFormatter(lambda x, p: human_format(x)))
@@ -230,10 +230,11 @@ for freq, sts in county_scan.items():
             cost += f*price*(county_series[freq][county]['S'][i]+county_series[freq][county]['I'][i]+county_series[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(POP*len(sts['H'])))
 
-ax0.plot(cp,tp,color='black',linewidth=2.5,zorder=1,label=county_variable)
-ax0.set_xlabel(xlabel)
-ax0.set_ylabel(ylabel)
-sc = ax0.scatter(cp,tp,marker='o',c = [np.log(f) for f in county_freqs],cmap = 'RdPu',zorder=2)
+ax0.plot(cp,tp,color='black',linewidth=2.5,zorder=3,label=county_variable)
+ax0.tick_params(axis='both', which='major', labelsize=20)
+ax0.set_xlabel(xlabel,fontsize=25)
+ax0.set_ylabel(ylabel,fontsize=25)
+sc = ax0.scatter(cp,tp,marker='o',c = [np.log(f) for f in county_freqs],cmap = 'RdPu',zorder=4, s=100)
 
 
 # cp = []
@@ -270,7 +271,7 @@ for freq, sts in pcr_scan_uniform.items():
             f = freq
             cost += f*100*(pcr_series_uniform[freq][county]['S'][i]+pcr_series_uniform[freq][county]['I'][i]+pcr_series_uniform[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(scale_pcr_cost*length*POP))    
-ax0.plot(cp,tp,color='pink',linewidth=2.5,label=uniform_pcr.format(scale_pcr_H))
+ax0.plot(cp,tp,color='#3ECBC2',linewidth=2.5,label=uniform_pcr.format(scale_pcr_H),zorder=1)
 
 cp = []
 price = 5
@@ -287,7 +288,7 @@ for freq, sts in county_scan_uniform.items():
             cost += f*price*(county_series_uniform[freq][county]['S'][i]+county_series_uniform[freq][county]['I'][i]+county_series_uniform[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(len(sts['H'])*POP))
 
-ax0.plot(cp,tp,color='grey',linewidth=2.5,label=uniform)
+ax0.plot(cp,tp,color='grey',linewidth=2.5,label=uniform,zorder=2)
 ax0.set_xlim(cost_min,cost_max)
 ax0.set_ylim(per_100k*hosp_min,per_100k*hosp_max)
 ax0.xaxis.labelpad = xlabelpad
@@ -315,11 +316,11 @@ for freq, sts in county_scan.items():
                 f = 1.0
             cost += f*price*(county_series[freq][county]['S'][i]+county_series[freq][county]['I'][i]+county_series[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(length*POP))
-     
-l3 = ax0.plot(cp,tp,color='black',linewidth=2.5,zorder=1,label=county_variable.format(scale_pcr_total))
-ax0.set_xlabel(xlabel)
-ax0.set_ylabel(ylabel)
-sc = ax0.scatter(cp,tp,marker='o',c = [np.log(f) for f in county_freqs],cmap = 'RdPu',zorder=2)
+l3 = ax0.plot(cp,tp,color='black',linewidth=2.5,zorder=3,label=county_variable.format(scale_pcr_total))
+ax0.tick_params(axis='both', which='major', labelsize=20)
+ax0.set_xlabel(xlabel,fontsize=25)
+ax0.set_ylabel(ylabel,fontsize=25)
+sc = ax0.scatter(cp,tp,marker='o',c = [np.log(f) for f in county_freqs],cmap = 'RdPu',zorder=4,s=100)
 
 
 # cp = []
@@ -356,7 +357,7 @@ for freq, sts in pcr_scan_uniform.items():
             f = freq
             cost += f*100*(pcr_series_uniform[freq][county]['S'][i]+pcr_series_uniform[freq][county]['I'][i]+pcr_series_uniform[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(scale_pcr_cost*length*POP))
-l2 = ax0.plot(cp,tp,color='pink',linewidth=2.5,label=uniform_pcr.format(scale_pcr_E))
+l2 = ax0.plot(cp,tp,color='#3ECBC2',linewidth=2.5,label=uniform_pcr.format(scale_pcr_E),zorder=1)
 
 cp = []
 price = 5
@@ -372,13 +373,14 @@ for freq, sts in county_scan_uniform.items():
             cost += f*price*(county_series_uniform[freq][county]['S'][i]+county_series_uniform[freq][county]['I'][i]+county_series_uniform[freq][county]['R'][i])*(pops[county])
     cp.append(cost/(length*POP))
 
-l1 = ax0.plot(cp,tp,color='grey',linewidth=2.5,label=uniform)
+l1 = ax0.plot(cp,tp,color='grey',linewidth=2.5,label=uniform,zorder=2)
 ax0.xaxis.labelpad = xlabelpad
 ax0.yaxis.labelpad = ylabelpad
 ax0.set_title('Deceased',fontsize = 22,fontweight='bold',x=0.0,horizontalalignment='left')
+ax0.tick_params(axis='both', which='major', labelsize=20)
 ax0.set_xlim(cost_min,cost_max)
 ax0.set_ylim(per_100k*dead_min,per_100k*dead_max)
-# ax0.legend(title_fontsize=22,fontsize=20,ncol=1,loc="upper right",facecolor='white', framealpha=0.8,edgecolor='None')
+# ax0.legend(title_fontsize=22,fontsize=25,ncol=1,loc="upper right",facecolor='white', framealpha=0.8,edgecolor='None')
 
 plt.grid()
 
@@ -389,13 +391,14 @@ c3 = l3[0].get_color()
 l4 = Line2D([0],[0],color=c2,lw=4)
 l5 = Line2D([0],[0],color=c1,lw=4)
 l6 = Line2D([0],[0],color=c3,lw=4)
-leg1 = fig.legend(handles=[l6,l5,l4],labels=[county_variable.format(scale_pcr_total),uniform,uniform_pcr.format("{}, {}, {}".format(scale_pcr_total,scale_pcr_H,scale_pcr_E))],fontsize=20,loc='upper center',bbox_to_anchor = (0.416,0.99),facecolor='white',ncol=3,edgecolor='None')
+leg1 = fig.legend(handles=[l6,l5,l4],labels=[county_variable.format(scale_pcr_total),uniform,uniform_pcr.format("{}, {}, {}".format(scale_pcr_total,scale_pcr_H,scale_pcr_E))],fontsize=25,loc='upper center',bbox_to_anchor = (0.416,1.01),facecolor='white',ncol=3,edgecolor='None')
 
 fig.add_artist(leg1)
         
 # Formats the colobar 
 def get_thresh(t,pos):
-    j = per_100k*np.exp(t)
+    j = 10**5 * np.exp(t) # convert to per 100k
+    #print(t,np.exp(t),j)
     thresh = ""
     if j < 1.0: thresh = "{:0.2f}".format(j)
     if j >= 1.0 and j < 10.0: thresh = "{:1.1f}".format(j)
@@ -406,9 +409,10 @@ def get_thresh(t,pos):
 cbar_ax = fig.add_axes([0.93, 0.15, 0.02, 0.7])
 cbar = plt.colorbar(sc,format=FuncFormatter(get_thresh),cax=cbar_ax)
 cbar.ax.tick_params(labelsize=20) 
-#cbar.ax.set_ylabel('Active Detected Infected Threshold (%)',fontsize=20,labelpad=-170)
-cbar.ax.set_ylabel('Detected per 100k Threshold',fontsize=20,labelpad=-150)
+#cbar.ax.set_ylabel('Active Detected Infected Threshold (%)',fontsize=25,labelpad=-170)
+cbar.ax.set_ylabel('Detected per 100k Threshold',fontsize=25,labelpad=-150)
 plt.savefig(outDir+'/County_Cost_plot'+'.pdf',bbox_inches='tight')
+plt.savefig(outDir+'/County_Cost_plot'+'.png',bbox_inches='tight')
 #plt.show()
 
 
