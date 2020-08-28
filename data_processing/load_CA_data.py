@@ -111,7 +111,7 @@ def load_date_of_death(in_dir = '../data/CA/raw', county = 'Los Angeles'):
     return data
 
 def load_counties(in_dir = '../data/CA/raw'):
-    counties = [ 'Alameda','Fresno',  'Imperial',  'Kern',   'Los Angeles', 'Marin',  'Merced',   'Monterey', 'Napa',  'Orange', 'Placer', 'Sacramento',  'San Bernardino', 'San Diego', 'San Francisco', 'San Joaquin', 'Santa Barbara', 'Santa Clara', 'Stanislaus', 'Ventura', 'Yolo']
+    counties = ['Alameda', 'Butte', 'Calaveras', 'Colusa', 'Contra Costa', 'Del Norte', 'El Dorado', 'Fresno', 'Glenn', 'Humboldt', 'Imperial', 'Inyo', 'Kern', 'Kings', 'Lake', 'Lassen', 'Los Angeles', 'Madera', 'Marin', 'Mariposa', 'Mendocino', 'Merced',  'Mono', 'Monterey', 'Napa', 'Nevada', 'Orange', 'Placer', 'Plumas', 'Riverside', 'Sacramento', 'San Benito', 'San Bernardino', 'San Diego', 'San Francisco', 'San Joaquin', 'San Luis Obispo', 'San Mateo', 'Santa Barbara', 'Santa Clara', 'Santa Cruz', 'Shasta', 'Siskiyou', 'Solano', 'Sonoma', 'Stanislaus', 'Sutter', 'Tehama', 'Trinity', 'Tulare','Ventura', 'Yolo', 'Yuba']
     county_data = {}
     pop_csv = 'CountyPops.csv'
     reader = csv.reader(open(os.path.join(in_dir,pop_csv),encoding='utf8'))

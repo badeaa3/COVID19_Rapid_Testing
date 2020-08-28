@@ -34,7 +34,7 @@ for county in list(cd.keys()):
     if pop/region_pop < 0.015: continue 
     if not any(c>0.0 for c in dt): continue
     total_included_pop += pop
-
+    print(county)
     # Save the data sets passing selection
     pops[county] = pop
     cases_tot[county]  = window_avg(series_interp(ct))
