@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy import integrate
 import sys
-sys.path.insert(1, '/Users/bnash/Downloads/Covid19Modeling-master3/data_processing')
+sys.path.insert(1, '../data_processing')
 print(sys.path)
 import os
 print(os.getcwd())
@@ -44,7 +44,7 @@ def window_avg(data = [], window = 1):
     return avg
 
 
-DATA = {'cases': load_cases_by_date('../Covid19Modeling-master3/data/NYC/raw'), 'hosp':load_hospitilization_from_hospitals('../Covid19Modeling-master3/data/NYC/raw'), 'deaths':load_date_of_death('../Covid19Modeling-master3/data/NYC/raw')}
+DATA = {'cases': load_cases_by_date('../data/NYC/raw'), 'hosp':load_hospitilization_from_hospitals('../data/NYC/raw'), 'deaths':load_date_of_death('../data/NYC/raw')}
 
 pop = 8.39*(10**6)
 sdate = '04/01/2020'

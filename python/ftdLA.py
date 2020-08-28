@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy import integrate
 import sys
-sys.path.insert(1, '/Users/bnash/Downloads/Covid19Modeling-master3/data_processing')
+sys.path.insert(1, '../data_processing')
 print(sys.path)
 import os
 print(os.getcwd())
@@ -43,8 +43,8 @@ def window_avg(data = [], window = 1):
             avg.append(np.mean(data[i-window+1:i+1]))
     return avg
 
-cd = load_counties('/Users/bnash/Downloads/Covid19Modeling-master3/data/CA/raw')
-DATA = {'cases': cd['Los Angeles']['cases'], 'hosp':cd['Los Angeles']['hosp'], 'deaths':cd['Los Angeles']['deaths'],'tests':load_testing_data('../Covid19Modeling-master3/data/CA/raw')}
+cd = load_counties('../data/CA/raw')
+DATA = {'cases': cd['Los Angeles']['cases'], 'hosp':cd['Los Angeles']['hosp'], 'deaths':cd['Los Angeles']['deaths'],'tests':load_testing_data('../data/CA/raw')}
 for i in DATA['tests']: DATA['tests'][i] = DATA['tests'][i][::-1]
 
 pop = cd['Los Angeles']['pop']
